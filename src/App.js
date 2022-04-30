@@ -5,7 +5,7 @@ import NavBar from "./components/NavBar";
 import News from "./components/News";
 // import { render } from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoadingBar from 'react-top-loading-bar'
+// import LoadingBar from 'react-top-loading-bar'
 
 export default class App extends Component {
   render() {
@@ -13,10 +13,10 @@ export default class App extends Component {
       <div>
         <BrowserRouter>
             <NavBar />
-            <LoadingBar
+            {/* <LoadingBar
         color='#f11946'
         progress={10} 
-      />
+      /> */}
           <Routes>
             {/* <News pageSize={9} country="in" category="general" /> */}
             <Route exact path="/" element={<News key="general" pageSize={9} country="in" category="general"/>}></Route>
