@@ -10,7 +10,7 @@ const News= (props)=> {
  const [loading, setLoading] = useState(true);
  const [page, setPage] = useState(1);
  const [totalResults, setTotalResults] = useState(0);
-//  document.title = `${this.capitilizeFirstLetter(props.category)} - NewsMonkey`
+
  
  const capitilizeFirstLetter=(string)=>{
 return string.charAt(0).toUpperCase() + string.slice(1);
@@ -18,7 +18,7 @@ return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   const updateNews = async() =>{
-    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=3f74eb4f14cd47bc9e3ca1d196b0ebaf&page=${page}&pageSize=${props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
     setLoading(true)
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -40,6 +40,7 @@ return string.charAt(0).toUpperCase() + string.slice(1);
 
   // }
   useEffect(() => {
+     document.title = `${capitilizeFirstLetter(props.category)} - NewsMonkey`
     updateNews()
   }, [])
   
@@ -60,7 +61,7 @@ return string.charAt(0).toUpperCase() + string.slice(1);
   };
   const fetchMoreData = async() => {
     setPage(page + 1)
-    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=3f74eb4f14cd47bc9e3ca1d196b0ebaf&page=${page}&pageSize=${props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
@@ -69,8 +70,8 @@ return string.charAt(0).toUpperCase() + string.slice(1);
   }
     return (
       <>
-        <h1 className="text-center"  style={{margin: '40px 0px'}}>News Monkey Top headlines from - {capitilizeFirstLetter(props.category)}</h1>
-        {/* {this.state.loading && <Spinner />} */}
+        <h1 className="text-center"  style={{margin: '40px 0px' , marginTop: '90px'}}>News Monkey Top headlines from - {capitilizeFirstLetter(props.category)}</h1>
+        {/* {loading && <Spinner />} */}
         <InfiniteScroll
           dataLength={articles.length}
           next={fetchMoreData}
